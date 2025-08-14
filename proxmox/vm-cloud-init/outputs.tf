@@ -9,7 +9,7 @@ output "vm_name" {
 }
 
 output "vm_username" {
-  value     = var.vm_username
+  value = var.vm_username
 }
 
 output "vm_ipv4_address" {

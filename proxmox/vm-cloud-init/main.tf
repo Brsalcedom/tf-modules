@@ -43,7 +43,7 @@ resource "proxmox_virtual_environment_vm" "this" {
   }
 
   agent {
-    enabled = false
+    enabled = var.qemu_agent
   }
 
   operating_system {
@@ -83,7 +83,6 @@ resource "proxmox_virtual_environment_vm" "this" {
   }
 
   depends_on = [
-    proxmox_virtual_environment_file.cloud_config,
-    tls_private_key.private_key
+    proxmox_virtual_environment_file.cloud_config
   ]
 }
