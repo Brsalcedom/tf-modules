@@ -84,12 +84,11 @@ variable "runcmd" {
 variable "ssh_authorized_keys" {
   description = "Public keys (one per line) for cloud-init"
   type        = string
-  default     = ""
 }
 
 variable "timezone" {
   type    = string
-  default = America / Santiago
+  default = "America/Santiago"
 }
 
 variable "bridge" {
@@ -100,4 +99,10 @@ variable "bridge" {
 variable "nic_model" {
   type    = string
   default = "virtio"
+}
+
+variable "qemu_agent" {
+  description = "Enable QEMU Guest Agent"
+  type        = bool
+  default     = false
 }
