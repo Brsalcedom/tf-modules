@@ -23,9 +23,9 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
   node_name    = var.node_name
   source_raw {
     data      = <<EOF
-    #cloud-config
-    ${yamlencode(local.cloud_config)}
-    EOF
+#cloud-config
+${yamlencode(local.cloud_config)}
+EOF
     file_name = "${var.vm_name}.yaml"
   }
 }
@@ -33,7 +33,7 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
 
 resource "proxmox_virtual_environment_vm" "this" {
   name        = var.vm_name
-  description = var.vm_description
+  description = trimspace(var.vm_description)
   tags        = var.vm_tags
   node_name   = var.node_name
   vm_id       = var.vm_id

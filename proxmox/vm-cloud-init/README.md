@@ -2,25 +2,6 @@
 
 This Terraform module provisions a **Proxmox VM** by cloning a cloud‑init–enabled template and attaching a `user-data` file uploaded to the Proxmox snippets datastore.
 
-## Basic usage
-
-```hcl
-module "proxmox_vm" {
-  source              = "git::https://github.com/Brsalcedom/tf-modules//proxmox/vm-cloud-init?ref=v0.1.0"
-  vm_name             = "k3s-hyperion"
-  vm_id               = 110
-  vm_memory           = 2048
-  vm_cpu_cores        = 2
-  clone_vm_id         = 9000
-  vm_username         = "rocky"
-  vm_ipv4_address     = "192.168.1.40/24"
-  vm_ipv4_gateway     = "192.168.1.1"
-  dns_servers         = ["1.1.1.1", "8.8.8.8"]
-  vm_tags             = ["k3s", "hyperion"]
-  ssh_authorized_keys = file("~/.ssh/id_rsa.pub")
-}
-```
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -51,7 +32,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_clone_vm_id"></a> [clone_vm_id](#input_clone_vm_id) | ID of the VM to clone from | `number` | n/a | yes |
 | <a name="input_dns_servers"></a> [dns_servers](#input_dns_servers) | List of DNS servers to use for the VM | `list(string)` | n/a | yes |
-| <a name="input_ssh_authorized_keys"></a> [ssh_authorized_keys](#input_ssh_authorized_keys) | Public keys (one per line) for cloud-init | `string` | n/a | yes |
+| <a name="input_ssh_authorized_keys"></a> [ssh_authorized_keys](#input_ssh_authorized_keys) | Public keys (one per line) for cloud-init | `list(string)` | n/a | yes |
 | <a name="input_vm_id"></a> [vm_id](#input_vm_id) | ID of the VM to create or clone | `number` | n/a | yes |
 | <a name="input_vm_ipv4_address"></a> [vm_ipv4_address](#input_vm_ipv4_address) | IPv4 address configuration for the VM | `string` | n/a | yes |
 | <a name="input_vm_ipv4_gateway"></a> [vm_ipv4_gateway](#input_vm_ipv4_gateway) | IPv4 gateway for the VM | `string` | n/a | yes |

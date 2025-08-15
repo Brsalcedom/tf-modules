@@ -83,7 +83,7 @@ variable "runcmd" {
 
 variable "ssh_authorized_keys" {
   description = "Public keys (one per line) for cloud-init"
-  type        = string
+  type        = list(string)
 }
 
 variable "timezone" {
