@@ -1,38 +1,19 @@
 # Proxmox LXC Container
 
-This Terraform module provisions an **LXC container** on Proxmox. It supports unprivileged containers, optional nesting, extra mounts, and cloud-init–style SSH public keys.
-
-## Basic Usage
-```hcl
-module "proxmox_lxc" {
-  source             = "git::https://github.com/Brsalcedom/tf-modules//proxmox/lxc?ref=v0.1.0"
-  vm_name            = "swarm-01"
-  vm_id              = 101
-  os_template        = "debian-12-standard_12.2-1_amd64.tar.zst"
-  vm_cpu_cores       = 2
-  vm_memory          = 2048
-  vm_disk_size       = 15
-  vm_ipv4_address    = "192.168.1.50/24"
-  vm_ipv4_gateway    = "192.168.1.1"
-  dns_server         = "1.1.1.1"
-  ssh_authorized_key = file("~/.ssh/id_rsa.pub")
-  vm_description     = "Docker Swarm node"
-  vm_tags            = ["terraform", "swarm", "docker"]
-}
-```
+This Terraform module provisions an **LXC container** on Proxmox. It supports unprivileged containers, optional nesting and cloud-init–style SSH public keys.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_proxmox"></a> [proxmox](#requirement_proxmox) | >= 3.0.0 |
+| <a name="requirement_proxmox"></a> [proxmox](#requirement_proxmox) | >= 0.80.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_proxmox"></a> [proxmox](#provider_proxmox) | >= 3.0.0 |
+| <a name="provider_proxmox"></a> [proxmox](#provider_proxmox) | >= 0.80.0 |
 
 ## Modules
 
@@ -42,15 +23,15 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [proxmox_lxc.this](https://registry.terraform.io/providers/Telmate/proxmox/latest/docs/resources/lxc) | resource |
+| [proxmox_virtual_environment_container.this](https://registry.terraform.io/providers/bpg/proxmox/latest/docs/resources/virtual_environment_container) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_dns_server"></a> [dns_server](#input_dns_server) | DNS server to use for the LXC container | `string` | n/a | yes |
+| <a name="input_dns_servers"></a> [dns_servers](#input_dns_servers) | DNS server to use for the LXC container | `list(string)` | n/a | yes |
 | <a name="input_os_template"></a> [os_template](#input_os_template) | OS template to use for the LXC container | `string` | n/a | yes |
-| <a name="input_ssh_authorized_key"></a> [ssh_authorized_key](#input_ssh_authorized_key) | Public key | `string` | n/a | yes |
+| <a name="input_ssh_authorized_keys"></a> [ssh_authorized_keys](#input_ssh_authorized_keys) | Public keys | `list(string)` | n/a | yes |
 | <a name="input_vm_id"></a> [vm_id](#input_vm_id) | ID of the LXC to create or clone | `number` | n/a | yes |
 | <a name="input_vm_ipv4_address"></a> [vm_ipv4_address](#input_vm_ipv4_address) | IPv4 address configuration for the LXC | `string` | n/a | yes |
 | <a name="input_vm_ipv4_gateway"></a> [vm_ipv4_gateway](#input_vm_ipv4_gateway) | IPv4 gateway for the LXC | `string` | n/a | yes |

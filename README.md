@@ -11,19 +11,19 @@ This module provisions an **LXC container** on Proxmox. It supports unprivileged
 #### Basic Usage
 ```hcl
 module "proxmox_lxc" {
-  source             = "git::https://github.com/Brsalcedom/tf-modules//proxmox/lxc?ref=v0.1.0"
-  vm_name            = "swarm-01"
-  vm_id              = 101
-  os_template        = "debian-12-standard_12.2-1_amd64.tar.zst"
-  vm_cpu_cores       = 2
-  vm_memory          = 2048
-  vm_disk_size       = 15
-  vm_ipv4_address    = "192.168.1.50/24"
-  vm_ipv4_gateway    = "192.168.1.1"
-  dns_server         = "1.1.1.1"
-  ssh_authorized_key = file("~/.ssh/id_rsa.pub")
-  vm_description     = "Docker Swarm node"
-  vm_tags            = "terraform;lxc"
+  source              = "git::https://github.com/Brsalcedom/tf-modules//proxmox/lxc?ref=v0.2.0"
+  dns_servers         = ["1.1.1.1", "8.8.8.8"]
+  os_template         = "debian-12-standard_12.2-1_amd64.tar.zst"
+  ssh_authorized_keys = [file("~/.ssh/id_rsa.pub")]
+  vm_cpu_cores        = 2
+  vm_description      = "Docker Swarm node"
+  vm_disk_size        = 15
+  vm_id               = 101
+  vm_ipv4_address     = "192.168.1.50/24"
+  vm_ipv4_gateway     = "192.168.1.1"
+  vm_memory           = 2048
+  vm_name             = "swarm-01"
+  vm_tags             = ["terraform", "lxc"]
 }
 ```
 
@@ -37,18 +37,18 @@ This module provisions a **Proxmox VM** by cloning a cloud-init–enabled templa
 
 ```hcl
 module "proxmox_vm" {
-  source                = "git::https://github.com/Brsalcedom/tf-modules//proxmox/vm-cloud-init?ref=v0.1.0"
-  vm_name               = "k3s-hyperion"
-  vm_id                 = 110
-  vm_memory             = 2048
-  vm_cpu_cores          = 2
-  clone_vm_id           = 9000
-  vm_username           = "rocky"
-  vm_ipv4_address       = "192.168.1.40/24"
-  vm_ipv4_gateway       = "192.168.1.1"
-  dns_servers           = ["1.1.1.1", "8.8.8.8"]
-  vm_tags               = ["k3s", "hyperion"]
-  ssh_authorized_keys   = file("id_rsa.pub")
+  source              = "git::https://github.com/Brsalcedom/tf-modules//proxmox/vm-cloud-init?ref=v0.2.0"
+  clone_vm_id         = 9000
+  dns_servers         = ["1.1.1.1", "8.8.8.8"]
+  ssh_authorized_keys = [file("~/.ssh/id_rsa.pub")]
+  vm_cpu_cores        = 2
+  vm_id               = 110
+  vm_ipv4_address     = "192.168.1.40/24"
+  vm_ipv4_gateway     = "192.168.1.1"
+  vm_memory           = 2048
+  vm_name             = "k3s-hyperion"
+  vm_tags             = ["k3s", "hyperion"]
+  vm_username         = "rocky"
 }
 ```
 

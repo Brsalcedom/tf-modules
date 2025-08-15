@@ -48,9 +48,9 @@ variable "node_name" {
   default     = "pve"
 }
 
-variable "dns_server" {
+variable "dns_servers" {
   description = "DNS server to use for the LXC container"
-  type        = string
+  type        = list(string)
 }
 
 variable "os_template" {
@@ -74,7 +74,7 @@ variable "nic_name" {
   default = "eth0"
 }
 
-variable "ssh_authorized_key" {
-  description = "Public key"
-  type        = string
+variable "ssh_authorized_keys" {
+  description = "Public keys"
+  type        = list(string)
 }
