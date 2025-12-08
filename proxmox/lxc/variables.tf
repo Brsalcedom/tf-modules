@@ -78,3 +78,9 @@ variable "ssh_authorized_keys" {
   description = "Public keys"
   type        = list(string)
 }
+
+variable "unprivileged" {
+  description = "Manage unprivileged container"
+  type        = bool
+  default     = true
+}
