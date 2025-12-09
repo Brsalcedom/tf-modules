@@ -55,4 +55,14 @@ resource "proxmox_virtual_environment_container" "this" {
   unprivileged  = var.unprivileged
   start_on_boot = true
   started       = true
+
+  dynamic "mount" {
+    for_each = var.nas_mountpoint != null ? [1] : []
+    content {
+      mp      = "/${var.nas_mountpoint}"
+      source  = "/mnt/nas/lxc/${var.nas_mountpoint}"
+      fstype  = "bind"
+      options = "rw"
+    }
+  }
 }
