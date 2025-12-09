@@ -84,3 +84,9 @@ variable "unprivileged" {
   type        = bool
   default     = true
 }
+
+variable "nas_mountpoint" {
+  description = "Mountpoint for the NAS (must be overridden)"
+  type        = string
+  default     = null
+}
