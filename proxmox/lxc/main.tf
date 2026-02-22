@@ -1,3 +1,9 @@
+locals {
+  nas_volume   = "NAS"
+  nas_basepath = "/mnt/nas/lxc"
+  nas_storage  = "1GB"
+}
+
 resource "proxmox_virtual_environment_container" "this" {
   node_name   = var.node_name
   vm_id       = var.vm_id
@@ -56,13 +62,13 @@ resource "proxmox_virtual_environment_container" "this" {
   start_on_boot = true
   started       = true
 
-  dynamic "mount" {
+  dynamic "mount_point" {
     for_each = var.nas_mountpoint != null ? [1] : []
     content {
-      mp      = "/${var.nas_mountpoint}"
-      source  = "/mnt/nas/lxc/${var.nas_mountpoint}"
-      fstype  = "bind"
-      options = "rw"
+      volume = local.nas_volume
+      path   = "${local.nas_basepath}/${var.nas_mountpoint}"
+      backup = true
+      size   = local.nas_storage
     }
   }
 }
