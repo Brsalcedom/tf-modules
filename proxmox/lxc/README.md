@@ -1,6 +1,8 @@
 # Proxmox LXC Container
 
-This Terraform module provisions an **LXC container** on Proxmox. It supports unprivileged containers, optional nesting and cloud-init–style SSH public keys.
+This Terraform module provisions an **LXC container** on Proxmox. It supports unprivileged containers, optional nesting and cloud-init-style SSH public keys.
+
+The module sets `started = true` but ignores drift on this field with `lifecycle.ignore_changes`, so a stopped container is not force-started on every apply.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
