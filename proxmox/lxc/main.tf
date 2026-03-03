@@ -62,6 +62,10 @@ resource "proxmox_virtual_environment_container" "this" {
   start_on_boot = true
   started       = true
 
+  lifecycle {
+    ignore_changes = [started]
+  }
+
   dynamic "mount_point" {
     for_each = var.nas_mountpoint != null ? [1] : []
     content {
