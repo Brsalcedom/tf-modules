@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/Brsalcedom/tf-modules/compare/v1.2.0...v1.2.1) (2026-03-03)
+
+
+### Bug Fixes
+
+* **proxmox/lxc:** ignore started drift to avoid apply failures ([#11](https://github.com/Brsalcedom/tf-modules/issues/11)) ([c727ffc](https://github.com/Brsalcedom/tf-modules/commit/c727ffcddf1edf2b3868e09fedc4d60b185fc21c))
+
 ## [1.2.0](https://github.com/Brsalcedom/tf-modules/compare/v1.1.0...v1.2.0) (2026-02-22)
 
 
