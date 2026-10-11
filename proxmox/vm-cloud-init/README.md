@@ -47,6 +47,7 @@ No modules.
 | <a name="input_runcmd"></a> [runcmd](#input_runcmd) | Commands to run after the VM is initialized | `list(string)` | `[]` | no |
 | <a name="input_timezone"></a> [timezone](#input_timezone) | n/a | `string` | `"America/Santiago"` | no |
 | <a name="input_vm_cpu_cores"></a> [vm_cpu_cores](#input_vm_cpu_cores) | Number of CPU cores allocated to the VM | `number` | `1` | no |
+| <a name="input_vm_cpu_type"></a> [vm_cpu_type](#input_vm_cpu_type) | CPU type/model to emulate for the VM (e.g. "host", "x86-64-v2-AES", "kvm64") | `string` | `"host"` | no |
 | <a name="input_vm_description"></a> [vm_description](#input_vm_description) | Description of the VM | `string` | `"VM created and managed by Terraform"` | no |
 | <a name="input_vm_memory"></a> [vm_memory](#input_vm_memory) | Memory allocated to the VM in MB | `number` | `1024` | no |
 | <a name="input_vm_tags"></a> [vm_tags](#input_vm_tags) | List of tags to apply to the VM | `list(string)` | <pre>[<br/>  "terraform"<br/>]</pre> | no |
