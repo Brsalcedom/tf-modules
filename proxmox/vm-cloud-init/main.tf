@@ -2,6 +2,7 @@ locals {
   cloud_config = merge(
     {
       hostname       = var.vm_name
+      fqdn           = var.vm_name
       timezone       = var.timezone
       package_update = true
       users = [
