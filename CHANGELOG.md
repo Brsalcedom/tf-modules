@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.4](https://github.com/Brsalcedom/tf-modules/compare/v1.2.3...v1.2.4) (2026-10-11)
+
+
+### Bug Fixes
+
+* **vm-cloud-init:** set fqdn explicitly to avoid localhost fallback ([#19](https://github.com/Brsalcedom/tf-modules/issues/19)) ([f564dd1](https://github.com/Brsalcedom/tf-modules/commit/f564dd10eafda3d5e2e5454df08c9b55010e9f03)), closes [#18](https://github.com/Brsalcedom/tf-modules/issues/18)
+
 ## [1.2.3](https://github.com/Brsalcedom/tf-modules/compare/v1.2.2...v1.2.3) (2026-10-11)
 
 
