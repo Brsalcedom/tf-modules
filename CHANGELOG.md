@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/Brsalcedom/tf-modules/compare/v1.2.2...v1.2.3) (2026-10-11)
+
+
+### Bug Fixes
+
+* **vm-cloud-init:** omit empty packages/runcmd from cloud-config ([#16](https://github.com/Brsalcedom/tf-modules/issues/16)) ([c67f2aa](https://github.com/Brsalcedom/tf-modules/commit/c67f2aa445c479769e672f4ade57892253680e38))
+
 ## [1.2.2](https://github.com/Brsalcedom/tf-modules/compare/v1.2.1...v1.2.2) (2026-10-11)
 
 
