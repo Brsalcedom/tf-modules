@@ -26,6 +26,12 @@ variable "vm_cpu_cores" {
   default     = 1
 }
 
+variable "vm_cpu_type" {
+  description = "CPU type/model to emulate for the VM (e.g. \"host\", \"x86-64-v2-AES\", \"kvm64\")"
+  type        = string
+  default     = "host"
+}
+
 variable "vm_ipv4_address" {
   description = "IPv4 address configuration for the VM"
   type        = string
