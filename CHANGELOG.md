@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/Brsalcedom/tf-modules/compare/v1.2.1...v1.2.2) (2026-10-11)
+
+
+### Bug Fixes
+
+* **vm-cloud-init:** make CPU type configurable, default to host ([#14](https://github.com/Brsalcedom/tf-modules/issues/14)) ([feceaf1](https://github.com/Brsalcedom/tf-modules/commit/feceaf1ceda46401c482675c5a095b410afdb54b))
+
 ## [1.2.1](https://github.com/Brsalcedom/tf-modules/compare/v1.2.0...v1.2.1) (2026-03-03)
 
 
