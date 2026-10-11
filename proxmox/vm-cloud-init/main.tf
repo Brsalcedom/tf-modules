@@ -1,20 +1,22 @@
 locals {
-  cloud_config = {
-    hostname       = var.vm_name
-    timezone       = var.timezone
-    package_update = true
-    packages       = var.packages
-    users = [
-      {
-        name                = var.vm_username
-        groups              = ["sudo"]
-        shell               = "/bin/bash"
-        sudo                = "ALL=(ALL) NOPASSWD:ALL"
-        ssh_authorized_keys = var.ssh_authorized_keys
-      }
-    ]
-    runcmd = var.runcmd
-  }
+  cloud_config = merge(
+    {
+      hostname       = var.vm_name
+      timezone       = var.timezone
+      package_update = true
+      users = [
+        {
+          name                = var.vm_username
+          groups              = ["sudo"]
+          shell               = "/bin/bash"
+          sudo                = "ALL=(ALL) NOPASSWD:ALL"
+          ssh_authorized_keys = var.ssh_authorized_keys
+        }
+      ]
+    },
+    length(var.packages) > 0 ? { packages = var.packages } : {},
+    length(var.runcmd) > 0 ? { runcmd = var.runcmd } : {}
+  )
 }
 
 resource "proxmox_virtual_environment_file" "cloud_config" {
