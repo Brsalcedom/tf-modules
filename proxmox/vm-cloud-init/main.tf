@@ -62,6 +62,17 @@ resource "proxmox_virtual_environment_vm" "this" {
     dedicated = var.vm_memory
   }
 
+  # Without vm_disk_size the clone keeps the template's disk untouched. With it,
+  # the disk on vm_disk_interface is resized; Proxmox can only grow a disk.
+  dynamic "disk" {
+    for_each = var.vm_disk_size == null ? [] : [var.vm_disk_size]
+    content {
+      interface    = var.vm_disk_interface
+      datastore_id = var.vm_disk_datastore_id
+      size         = disk.value
+    }
+  }
+
   initialization {
     dns {
       servers = var.dns_servers

@@ -2,6 +2,21 @@
 
 This Terraform module provisions a **Proxmox VM** by cloning a cloud‑init–enabled template and attaching a `user-data` file uploaded to the Proxmox snippets datastore.
 
+## Boot disk size
+
+By default the clone keeps the template's disk as it is. Set `vm_disk_size` (GB) to grow it:
+
+```hcl
+vm_disk_size         = 60
+vm_disk_interface    = "scsi0"     # the template's boot disk
+vm_disk_datastore_id = "local-lvm" # where that disk already is
+```
+
+- `vm_disk_interface` and `vm_disk_datastore_id` must match the template's disk. A different datastore makes Proxmox move the disk.
+- Proxmox can only grow a disk. Lowering `vm_disk_size` fails.
+- Setting it on an existing VM makes the module manage that disk. Check the plan: only `size` should change. The provider also applies its defaults for `aio`, `cache`, `discard`, `iothread`, `ssd`, `backup` and `replicate`, so a template disk with other values shows up as an in-place change.
+- Proxmox grows the virtual disk only. On first boot, cloud-init's `growpart` grows the root partition; on an existing VM, grow the partition and the filesystem from inside the guest (and the PV and LV first, on images with LVM).
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -49,6 +64,9 @@ No modules.
 | <a name="input_vm_cpu_cores"></a> [vm_cpu_cores](#input_vm_cpu_cores) | Number of CPU cores allocated to the VM | `number` | `1` | no |
 | <a name="input_vm_cpu_type"></a> [vm_cpu_type](#input_vm_cpu_type) | CPU type/model to emulate for the VM (e.g. "host", "x86-64-v2-AES", "kvm64") | `string` | `"host"` | no |
 | <a name="input_vm_description"></a> [vm_description](#input_vm_description) | Description of the VM | `string` | `"VM created and managed by Terraform"` | no |
+| <a name="input_vm_disk_datastore_id"></a> [vm_disk_datastore_id](#input_vm_disk_datastore_id) | Datastore of the template's boot disk. Must match where the disk already is, or Proxmox moves it | `string` | `"local-lvm"` | no |
+| <a name="input_vm_disk_interface"></a> [vm_disk_interface](#input_vm_disk_interface) | Interface of the template's boot disk, resized when vm_disk_size is set | `string` | `"scsi0"` | no |
+| <a name="input_vm_disk_size"></a> [vm_disk_size](#input_vm_disk_size) | Size of the boot disk in GB. null keeps the size of the template's disk. Proxmox can only grow a disk, so lowering it fails | `number` | `null` | no |
 | <a name="input_vm_memory"></a> [vm_memory](#input_vm_memory) | Memory allocated to the VM in MB | `number` | `1024` | no |
 | <a name="input_vm_tags"></a> [vm_tags](#input_vm_tags) | List of tags to apply to the VM | `list(string)` | <pre>[<br/>  "terraform"<br/>]</pre> | no |
 
