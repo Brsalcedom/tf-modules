@@ -14,7 +14,7 @@ vm_disk_datastore_id = "local-lvm" # where that disk already is
 
 - `vm_disk_interface` and `vm_disk_datastore_id` must match the template's disk. A different datastore makes Proxmox move the disk.
 - Proxmox can only grow a disk. Lowering `vm_disk_size` fails.
-- Setting it on an existing VM makes the module manage that disk. Check the plan: only `size` should change. The provider also applies its defaults for `aio`, `cache`, `discard`, `iothread`, `ssd`, `backup` and `replicate`, so a template disk with other values shows up as an in-place change.
+- Setting it on an existing VM makes the module manage that disk. The first plan shows the block as `+ disk`, so it does not show what changes on the disk. The provider applies `iothread` (from `vm_disk_iothread`) and its defaults `aio = io_uring`, `cache = none`, `discard = ignore` and `ssd = false`. Compare them with `qm config <vm_id>` before applying: a template disk with other values gets changed.
 - Proxmox grows the virtual disk only. On first boot, cloud-init's `growpart` grows the root partition; on an existing VM, grow the partition and the filesystem from inside the guest (and the PV and LV first, on images with LVM).
 
 <!-- BEGIN_TF_DOCS -->
@@ -66,6 +66,7 @@ No modules.
 | <a name="input_vm_description"></a> [vm_description](#input_vm_description) | Description of the VM | `string` | `"VM created and managed by Terraform"` | no |
 | <a name="input_vm_disk_datastore_id"></a> [vm_disk_datastore_id](#input_vm_disk_datastore_id) | Datastore of the template's boot disk. Must match where the disk already is, or Proxmox moves it | `string` | `"local-lvm"` | no |
 | <a name="input_vm_disk_interface"></a> [vm_disk_interface](#input_vm_disk_interface) | Interface of the template's boot disk, resized when vm_disk_size is set | `string` | `"scsi0"` | no |
+| <a name="input_vm_disk_iothread"></a> [vm_disk_iothread](#input_vm_disk_iothread) | Use an IO thread for the boot disk, when vm_disk_size is set. Proxmox enables it for disks on the virtio-scsi-single controller, so true matches templates built from the GUI | `bool` | `true` | no |
 | <a name="input_vm_disk_size"></a> [vm_disk_size](#input_vm_disk_size) | Size of the boot disk in GB. null keeps the size of the template's disk. Proxmox can only grow a disk, so lowering it fails | `number` | `null` | no |
 | <a name="input_vm_memory"></a> [vm_memory](#input_vm_memory) | Memory allocated to the VM in MB | `number` | `1024` | no |
 | <a name="input_vm_tags"></a> [vm_tags](#input_vm_tags) | List of tags to apply to the VM | `list(string)` | <pre>[<br/>  "terraform"<br/>]</pre> | no |
