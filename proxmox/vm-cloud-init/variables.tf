@@ -55,6 +55,12 @@ variable "vm_disk_datastore_id" {
   default     = "local-lvm"
 }
 
+variable "vm_disk_iothread" {
+  description = "Use an IO thread for the boot disk, when vm_disk_size is set. Proxmox enables it for disks on the virtio-scsi-single controller, so true matches templates built from the GUI"
+  type        = bool
+  default     = true
+}
+
 variable "vm_ipv4_address" {
   description = "IPv4 address configuration for the VM"
   type        = string

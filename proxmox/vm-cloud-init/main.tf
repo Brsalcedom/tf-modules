@@ -70,6 +70,9 @@ resource "proxmox_virtual_environment_vm" "this" {
       interface    = var.vm_disk_interface
       datastore_id = var.vm_disk_datastore_id
       size         = disk.value
+      # Applied to the existing disk too: the provider sets every option of the
+      # block, so this has to match the template's disk.
+      iothread = var.vm_disk_iothread
     }
   }
 
