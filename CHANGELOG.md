@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/Brsalcedom/tf-modules/compare/v1.3.0...v1.4.0) (2026-10-21)
+
+
+### Features
+
+* **vm-cloud-init:** add vm_disk_iothread for the managed boot disk ([#23](https://github.com/Brsalcedom/tf-modules/issues/23)) ([918187a](https://github.com/Brsalcedom/tf-modules/commit/918187a9680bf9ab3d3f2012ed2e4081e5bdf643))
+
 ## [1.3.0](https://github.com/Brsalcedom/tf-modules/compare/v1.2.4...v1.3.0) (2026-10-21)
 
 
