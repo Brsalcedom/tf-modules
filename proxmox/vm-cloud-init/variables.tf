@@ -32,6 +32,29 @@ variable "vm_cpu_type" {
   default     = "host"
 }
 
+variable "vm_disk_size" {
+  description = "Size of the boot disk in GB. null keeps the size of the template's disk. Proxmox can only grow a disk, so lowering it fails"
+  type        = number
+  default     = null
+
+  validation {
+    condition     = var.vm_disk_size == null || try(var.vm_disk_size > 0, false)
+    error_message = "vm_disk_size must be a positive number of GB, or null."
+  }
+}
+
+variable "vm_disk_interface" {
+  description = "Interface of the template's boot disk, resized when vm_disk_size is set"
+  type        = string
+  default     = "scsi0"
+}
+
+variable "vm_disk_datastore_id" {
+  description = "Datastore of the template's boot disk. Must match where the disk already is, or Proxmox moves it"
+  type        = string
+  default     = "local-lvm"
+}
+
 variable "vm_ipv4_address" {
   description = "IPv4 address configuration for the VM"
   type        = string
