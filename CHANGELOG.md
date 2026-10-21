@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/Brsalcedom/tf-modules/compare/v1.2.4...v1.3.0) (2026-10-21)
+
+
+### Features
+
+* **vm-cloud-init:** add optional boot disk size ([#21](https://github.com/Brsalcedom/tf-modules/issues/21)) ([606a2ac](https://github.com/Brsalcedom/tf-modules/commit/606a2acd2069d5682d7aa3dd55aec4685211de9f))
+
 ## [1.2.4](https://github.com/Brsalcedom/tf-modules/compare/v1.2.3...v1.2.4) (2026-10-11)
 
 
